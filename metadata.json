@@ -1,0 +1,5 @@
+{
+  "name": "Copy of Ministry Meeting Scheduler",
+  "description": "An application to help the Life and Ministry Meeting overseer schedule student assignments for the weekly meeting. It provides a clear view of the program and available students, and uses AI to generate preparation tips for each part.",
+  "requestFramePermissions": []
+}
