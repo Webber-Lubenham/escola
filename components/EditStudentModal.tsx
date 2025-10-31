@@ -54,6 +54,10 @@ const statusStyles: Record<Assignment['status'], string> = {
     absent: 'bg-red-100 text-red-800',
 };
 
+const maleOnlyPrivileges: (keyof Student['privileges'])[] = [
+    'chairman', 'pray', 'treasures', 'gems', 'reading', 'talk'
+];
+
 const EditStudentModal: React.FC<EditStudentModalProps> = ({ student, allAssignments, onSave, onClose }) => {
     const [formData, setFormData] = useState<Omit<Student, 'id'>>(emptyStudent);
 
@@ -87,10 +91,21 @@ const EditStudentModal: React.FC<EditStudentModalProps> = ({ student, allAssignm
             handlePrivilegeChange(e as React.ChangeEvent<HTMLInputElement>);
           }
         } else if (name === 'gender') {
-            setFormData(prev => ({
-                ...prev,
-                gender: value as 'male' | 'female',
-            }));
+            const newGender = value as 'male' | 'female';
+            setFormData(prev => {
+                const newPrivileges = { ...prev.privileges };
+                if (newGender === 'female') {
+                    // A sister cannot have male-only privileges, so uncheck them.
+                    maleOnlyPrivileges.forEach(p => {
+                        newPrivileges[p] = false;
+                    });
+                }
+                return {
+                    ...prev,
+                    gender: newGender,
+                    privileges: newPrivileges
+                };
+            });
         } else {
           setFormData(prev => ({...prev, [name]: value}));
         }
@@ -235,18 +250,24 @@ const EditStudentModal: React.FC<EditStudentModalProps> = ({ student, allAssignm
                         <fieldset>
                             <legend className="text-md font-medium text-gray-800">Privileges</legend>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 mt-2 p-3 bg-gray-50 rounded-md border">
-                                {PRIVILEGE_LIST.map(priv => (
-                                    <label key={priv.key} className="flex items-center space-x-2">
-                                        <input
-                                            type="checkbox"
-                                            name={priv.key}
-                                            checked={formData.privileges[priv.key as keyof Student['privileges']] || false}
-                                            onChange={handlePrivilegeChange}
-                                            className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                                        />
-                                        <span className="text-sm text-gray-700">{priv.label}</span>
-                                    </label>
-                                ))}
+                                {PRIVILEGE_LIST.map(priv => {
+                                    const isMaleOnly = maleOnlyPrivileges.includes(priv.key);
+                                    const isDisabled = isMaleOnly && formData.gender === 'female';
+
+                                    return (
+                                        <label key={priv.key} className={`flex items-center space-x-2 ${isDisabled ? 'cursor-not-allowed opacity-50' : ''}`}>
+                                            <input
+                                                type="checkbox"
+                                                name={priv.key}
+                                                checked={formData.privileges[priv.key as keyof Student['privileges']] || false}
+                                                onChange={handlePrivilegeChange}
+                                                disabled={isDisabled}
+                                                className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                                            />
+                                            <span className="text-sm text-gray-700">{priv.label}</span>
+                                        </label>
+                                    );
+                                })}
                             </div>
                         </fieldset>
 

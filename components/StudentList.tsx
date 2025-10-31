@@ -3,6 +3,7 @@ import { Assignment, Student } from '../types';
 import EditStudentModal from './EditStudentModal';
 import ImportStudentsModal from './ImportStudentsModal';
 import ConfirmationModal from './ConfirmationModal';
+import { studentRoleLabels } from '../i18n';
 
 interface StudentListProps {
   students: Student[];
@@ -101,37 +102,40 @@ const StudentList: React.FC<StudentListProps> = ({ students, assignments, onAddS
            </div>
         ) : (
         <ul className="space-y-3 max-h-[600px] overflow-y-auto">
-          {students.map(student => (
-            <li key={student.id} className="p-3 bg-gray-50 rounded-md flex items-center justify-between group">
-               <div className="flex items-center space-x-3">
-                    <div className="relative">
-                        <div className="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-lg flex-shrink-0">
-                            {student.nome.charAt(0)}{student.familia.charAt(0)}
-                        </div>
-                        <span className={`absolute bottom-0 right-0 block h-3 w-3 rounded-full ring-2 ring-white ${student.ativo ? 'bg-green-400' : 'bg-gray-400'}`} title={student.ativo ? 'Active' : 'Inactive'}></span>
-                    </div>
-                    <div>
-                        <p className="font-semibold text-gray-800">{student.nome} {student.familia}</p>
-                        <p className="text-sm text-gray-500 capitalize">
-                           {student.cargo ? student.cargo.replace(/_/g, ' ') : (student.gender === 'male' ? 'Brother' : 'Sister')}
-                        </p>
-                    </div>
+          {students.map(student => {
+            const roleLabel = student.cargo ? studentRoleLabels.en[student.cargo] : (student.gender === 'male' ? 'Brother' : 'Sister');
+            return (
+              <li key={student.id} className="p-3 bg-gray-50 rounded-md flex items-center justify-between group">
+                 <div className="flex items-center space-x-3">
+                      <div className="relative">
+                          <div className="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-lg flex-shrink-0">
+                              {student.nome.charAt(0)}{student.familia.charAt(0)}
+                          </div>
+                          <span className={`absolute bottom-0 right-0 block h-3 w-3 rounded-full ring-2 ring-white ${student.ativo ? 'bg-green-400' : 'bg-gray-400'}`} title={student.ativo ? 'Active' : 'Inactive'}></span>
+                      </div>
+                      <div>
+                          <p className="font-semibold text-gray-800">{student.nome} {student.familia}</p>
+                          <p className="text-sm text-gray-500">
+                             {roleLabel}
+                          </p>
+                      </div>
+                  </div>
+                <div className="flex items-center space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <button onClick={() => handleOpenEdit(student)} className="p-2 text-gray-500 hover:text-blue-600 rounded-full hover:bg-blue-100" title="Edit Student">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                            <path fillRule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clipRule="evenodd" />
+                        </svg>
+                    </button>
+                    <button onClick={() => handleDeleteClick(student)} className="p-2 text-gray-500 hover:text-red-600 rounded-full hover:bg-red-100" title="Delete Student">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                             <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 012 0v6a1 1 0 11-2 0V8z" clipRule="evenodd" />
+                        </svg>
+                    </button>
                 </div>
-              <div className="flex items-center space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <button onClick={() => handleOpenEdit(student)} className="p-2 text-gray-500 hover:text-blue-600 rounded-full hover:bg-blue-100" title="Edit Student">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                          <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                          <path fillRule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clipRule="evenodd" />
-                      </svg>
-                  </button>
-                  <button onClick={() => handleDeleteClick(student)} className="p-2 text-gray-500 hover:text-red-600 rounded-full hover:bg-red-100" title="Delete Student">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                           <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 012 0v6a1 1 0 11-2 0V8z" clipRule="evenodd" />
-                      </svg>
-                  </button>
-              </div>
-            </li>
-          ))}
+              </li>
+            );
+          })}
         </ul>
         )}
       </div>

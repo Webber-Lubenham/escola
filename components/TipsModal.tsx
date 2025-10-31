@@ -21,7 +21,8 @@ const TipsModal: React.FC<TipsModalProps> = ({ part, onClose }) => {
       const generatedTips = await getPreparationTips(part, partInstructions);
       setTips(generatedTips);
     } catch (err) {
-      setError('Failed to fetch tips. Please check your API key and try again.');
+      const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred while fetching tips.';
+      setError(errorMessage);
       console.error(err);
     } finally {
       setIsLoading(false);

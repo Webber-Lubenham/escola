@@ -2,15 +2,24 @@ import { GoogleGenAI } from "@google/genai";
 import { MeetingPart } from "../types";
 import { marked } from 'marked';
 
-// IMPORTANT: This assumes the API_KEY is set in the environment variables.
-// Do not add any UI for entering the API key.
-const API_KEY = process.env.API_KEY;
+let ai: GoogleGenAI | null = null;
 
-if (!API_KEY) {
-    console.warn("API_KEY environment variable not set. Gemini API calls will fail.");
-}
+// Lazily initialize the AI instance to avoid crashing on startup if the API key is missing.
+const getAiInstance = (): GoogleGenAI => {
+    if (ai) {
+        return ai;
+    }
+    
+    const API_KEY = process.env.API_KEY;
+    if (!API_KEY) {
+        // This error will be caught by the calling component and displayed to the user.
+        throw new Error("The AI feature is unavailable because the API key has not been configured.");
+    }
+    
+    ai = new GoogleGenAI({ apiKey: API_KEY });
+    return ai;
+};
 
-const ai = new GoogleGenAI({ apiKey: API_KEY! });
 
 /**
  * Extracts the ministry setting from the part's title or references.
@@ -114,14 +123,11 @@ ${conclusion}`;
 
 
 export async function getPreparationTips(part: MeetingPart, instructions: string): Promise<string> {
-    if (!API_KEY) {
-        throw new Error("Gemini API key is not configured.");
-    }
-
-    const prompt = generatePrompt(part, instructions);
-
     try {
-        const response = await ai.models.generateContent({
+        const aiInstance = getAiInstance();
+        const prompt = generatePrompt(part, instructions);
+
+        const response = await aiInstance.models.generateContent({
             model: 'gemini-2.5-pro',
             contents: prompt,
             config: {
@@ -139,6 +145,9 @@ export async function getPreparationTips(part: MeetingPart, instructions: string
 
     } catch (error) {
         console.error("Error calling Gemini API:", error);
-        throw new Error("Failed to generate tips from Gemini API.");
+        if (error instanceof Error && error.message.includes("API key")) {
+             throw new Error("The AI feature is currently unavailable due to a configuration issue.");
+        }
+        throw new Error("Failed to generate tips from the AI service.");
     }
 }
