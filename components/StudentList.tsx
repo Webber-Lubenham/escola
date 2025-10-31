@@ -12,9 +12,10 @@ interface StudentListProps {
   onUpdateStudent: (student: Student) => void;
   onDeleteStudent: (studentId: string) => void;
   onImportStudents: (students: Student[]) => void;
+  onAutoAssign: () => void;
 }
 
-const StudentList: React.FC<StudentListProps> = ({ students, assignments, onAddStudent, onUpdateStudent, onDeleteStudent, onImportStudents }) => {
+const StudentList: React.FC<StudentListProps> = ({ students, assignments, onAddStudent, onUpdateStudent, onDeleteStudent, onImportStudents, onAutoAssign }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
   const [editingStudent, setEditingStudent] = useState<Student | null>(null);
@@ -94,6 +95,14 @@ const StudentList: React.FC<StudentListProps> = ({ students, assignments, onAddS
                 <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
               </svg>
               <span>Add</span>
+            </button>
+            <button
+              onClick={onAutoAssign}
+              className="flex items-center space-x-2 px-3 py-2 text-sm font-semibold bg-indigo-500 text-white rounded-md hover:bg-indigo-600 transition-colors shadow-sm"
+              title="Auto-assign Students"
+            >
+               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 1-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 1 3.09-3.09L12 5.25l2.846.813a4.5 4.5 0 0 1 3.09 3.09L21.75 12l-2.846.813a4.5 4.5 0 0 1-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.898 20.51l-1.5-1.5-1.4-1.4a3.375 3.375 0 0 0-2.455-2.456L10.5 15.25l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L15 11.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L18.75 15l-1.035.259a3.375 3.375 0 0 0-2.456 2.456z" /></svg>
+               <span>Apply</span>
             </button>
           </div>
         </div>

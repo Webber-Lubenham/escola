@@ -1,3 +1,4 @@
+
 export const studentRoles = [
   'anciao',
   'servo_ministerial',
@@ -48,6 +49,13 @@ export interface MeetingPart {
   };
   referencias?: string[];
   tema?: string;
+  // New optional fields for workbook UI
+  long_description?: string;
+  image?: {
+    alt: string;
+  };
+  questions?: string[];
+  lembrete?: string;
 }
 
 export interface MeetingSection {
@@ -60,6 +68,8 @@ export interface WeeklyProgram {
   semanaLabel: string;
   tema: string;
   programacao: MeetingSection[];
+  audio?: string;
+  source?: string;
 }
 
 export interface Assignment {
@@ -87,4 +97,34 @@ export interface AutoAssignDiagnostics {
 export interface AutoAssignResult {
   suggestions: Record<string, string>; // partId -> studentId
   diagnostics: AutoAssignDiagnostics;
+}
+
+// Types for History Balancer
+export interface HistoricoDesignacao {
+  total_designacoes_8_semanas: number;
+  ultima_designacao?: string; // date string 'YYYY-MM-DD'
+  designacoes_recentes: { data_inicio_semana: string }[];
+}
+
+export interface PontuacaoPrioridade {
+  estudanteId: string;
+  pontuacaoBase: number;
+  fatorAleatorio: number;
+  pontuacaoFinal: number;
+  totalDesignacoes8Semanas: number;
+  diasDesdeUltima?: number;
+  ultimaDesignacao?: string;
+  detalhes: {
+    bonusTempoSemDesignacao: number;
+    penalizacaoFrequencia: number;
+    ajusteAleatorio: number;
+  };
+}
+
+export interface ConfiguracaoBalanceamento {
+  pesoFrequencia: number;
+  pesoTempoSemDesignacao: number;
+  fatorAleatorioMax: number;
+  semanasHistorico: number;
+  bonusMaximoTempo: number;
 }

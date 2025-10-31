@@ -52,6 +52,26 @@ const AutoAssignModal: React.FC<AutoAssignModalProps> = ({ result, program, stud
                         </div>
                     )}
 
+                    {result.diagnostics.warnings.length > 0 && (
+                         <div className="mt-6">
+                            <h4 className="font-medium text-yellow-800 mb-3">Warnings</h4>
+                            <ul className="space-y-3">
+                                {result.diagnostics.warnings.map((warning, index) => (
+                                    <li key={index} className="p-3 bg-yellow-50 text-yellow-900 rounded-md">
+                                      <div className="flex items-start space-x-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 flex-shrink-0 mt-0.5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fillRule="evenodd" d="M8.257 3.099a.75.75 0 011.486 0l5.25 9.286a.75.75 0 01-.643 1.115H4.156a.75.75 0 01-.643-1.115l5.25-9.286zM9 8a.75.75 0 01.75.75v3a.75.75 0 01-1.5 0v-3A.75.75 0 019 8zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+                                        </svg>
+                                        <div>
+                                          <p className="text-sm">{warning}</p>
+                                        </div>
+                                      </div>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+
                     {result.diagnostics.unassignedParts.length > 0 && (
                          <div className="mt-6">
                             <h4 className="font-medium text-red-700 mb-3">Unassigned Parts</h4>
@@ -71,7 +91,7 @@ const AutoAssignModal: React.FC<AutoAssignModalProps> = ({ result, program, stud
                             </ul>
                         </div>
                     )}
-                     {suggestionEntries.length === 0 && result.diagnostics.unassignedParts.length === 0 && (
+                     {suggestionEntries.length === 0 && result.diagnostics.unassignedParts.length === 0 && result.diagnostics.warnings.length === 0 && (
                         <p className="text-center text-gray-600 py-8">All student parts for this week are already assigned.</p>
                     )}
                 </div>

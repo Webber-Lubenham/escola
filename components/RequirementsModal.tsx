@@ -40,18 +40,26 @@ const RequirementsModal: React.FC<RequirementsModalProps> = ({ part, currentRequ
                         <p className="text-sm text-gray-700 mb-4">
                             Select additional privileges required for a student to be assigned this part. The default privilege for this part type is always required.
                         </p>
-                        <div className="grid grid-cols-1 gap-2 p-3 bg-gray-50 rounded-md border">
+                        <div className="grid grid-cols-1 gap-4 p-3 bg-gray-50 rounded-md border">
                             {PRIVILEGE_LIST.map(priv => (
-                                <label key={priv.key} className="flex items-center space-x-3 p-2 rounded-md hover:bg-gray-100">
-                                    <input
-                                        type="checkbox"
-                                        name={priv.key}
-                                        checked={selectedPrivileges.includes(priv.key)}
-                                        onChange={handlePrivilegeChange}
-                                        className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                                    />
-                                    <span className="text-sm text-gray-800">{priv.label}</span>
-                                </label>
+                                <div key={priv.key} className="relative flex items-start">
+                                    <div className="flex h-6 items-center">
+                                        <input
+                                            id={`req-${priv.key}`}
+                                            name={priv.key}
+                                            type="checkbox"
+                                            checked={selectedPrivileges.includes(priv.key)}
+                                            onChange={handlePrivilegeChange}
+                                            className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600 cursor-pointer"
+                                        />
+                                    </div>
+                                    <div className="ml-3 text-sm leading-6">
+                                        <label htmlFor={`req-${priv.key}`} className="font-medium text-gray-900 cursor-pointer">
+                                            {priv.label}
+                                        </label>
+                                        <p className="text-gray-500 text-xs">{priv.description}</p>
+                                    </div>
+                                </div>
                             ))}
                         </div>
                     </div>

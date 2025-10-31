@@ -244,23 +244,31 @@ const EditStudentModal: React.FC<EditStudentModalProps> = ({ student, allAssignm
                         {/* Privileges */}
                         <fieldset>
                             <legend className="text-md font-medium text-gray-800">Privileges</legend>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 mt-2 p-3 bg-gray-50 rounded-md border">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 mt-2 p-4 bg-gray-50 rounded-md border">
                                 {PRIVILEGE_LIST.map(priv => {
                                     const isMaleOnly = maleOnlyPrivileges.includes(priv.key);
                                     const isDisabled = isMaleOnly && formData.gender === 'female';
 
                                     return (
-                                        <label key={priv.key} className={`flex items-center space-x-2 ${isDisabled ? 'cursor-not-allowed opacity-50' : ''}`}>
-                                            <input
-                                                type="checkbox"
-                                                name={priv.key}
-                                                checked={formData.privileges[priv.key as keyof Student['privileges']] || false}
-                                                onChange={handlePrivilegeChange}
-                                                disabled={isDisabled}
-                                                className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                                            />
-                                            <span className="text-sm text-gray-700">{priv.label}</span>
-                                        </label>
+                                        <div key={priv.key} className={`relative flex items-start ${isDisabled ? 'opacity-60' : ''}`}>
+                                            <div className="flex h-6 items-center">
+                                                <input
+                                                    id={priv.key}
+                                                    name={priv.key}
+                                                    type="checkbox"
+                                                    checked={formData.privileges[priv.key as keyof Student['privileges']] || false}
+                                                    onChange={handlePrivilegeChange}
+                                                    disabled={isDisabled}
+                                                    className={`h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600 ${isDisabled ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+                                                />
+                                            </div>
+                                            <div className="ml-3 text-sm leading-6">
+                                                <label htmlFor={priv.key} className={`font-medium text-gray-900 ${isDisabled ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
+                                                    {priv.label}
+                                                </label>
+                                                <p className="text-gray-500 text-xs">{priv.description}</p>
+                                            </div>
+                                        </div>
                                     );
                                 })}
                             </div>

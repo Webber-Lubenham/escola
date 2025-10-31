@@ -21,13 +21,39 @@ export const formatWeekLabel = (d: Date, lang: 'pt' | 'en'): string => {
 
     const locale = lang === 'pt' ? 'pt-BR' : 'en-US';
     
-    const monthName = new Intl.DateTimeFormat(locale, { month: 'long' }).format(monday);
+    const mondayMonth = monday.getMonth();
+    const sundayMonth = sunday.getMonth();
     const year = monday.getFullYear();
+    const sundayYear = sunday.getFullYear();
 
-    if (lang === 'pt') {
-        return `${monday.getDate()}-${sunday.getDate()} de ${monthName} de ${year}`;
+    if (mondayMonth === sundayMonth) {
+        // Same month, e.g., "September 1-7, 2025" or "1-7 de setembro de 2025"
+        const monthName = new Intl.DateTimeFormat(locale, { month: 'long' }).format(monday);
+        if (lang === 'pt') {
+            return `${monday.getDate()}-${sunday.getDate()} de ${monthName} de ${year}`;
+        } else {
+            return `${monthName} ${monday.getDate()}-${sunday.getDate()}, ${year}`;
+        }
     } else {
-        return `${monthName} ${monday.getDate()}-${sunday.getDate()}, ${year}`;
+        // Different months, e.g., "August 26 - September 1, 2025" or "26 de agosto a 1 de setembro de 2025"
+        const mondayMonthName = new Intl.DateTimeFormat(locale, { month: 'long' }).format(monday);
+        const sundayMonthName = new Intl.DateTimeFormat(locale, { month: 'long' }).format(sunday);
+
+        if (lang === 'pt') {
+             if (year !== sundayYear) {
+                // Spans across years, e.g. "29 de dezembro de 2025 a 4 de janeiro de 2026"
+                return `${monday.getDate()} de ${mondayMonthName} de ${year} a ${sunday.getDate()} de ${sundayMonthName} de ${sundayYear}`;
+            }
+            // Spans across months in the same year, e.g. "29 de setembro a 5 de outubro de 2025"
+            return `${monday.getDate()} de ${mondayMonthName} a ${sunday.getDate()} de ${sundayMonthName} de ${year}`;
+        } else {
+            if (year !== sundayYear) {
+                // Spans across years, e.g. "December 29, 2025 – January 4, 2026"
+                return `${mondayMonthName} ${monday.getDate()}, ${year} – ${sundayMonthName} ${sunday.getDate()}, ${sundayYear}`;
+            }
+            // Spans across months in the same year, e.g. "September 29 – October 5, 2025"
+            return `${mondayMonthName} ${monday.getDate()} – ${sundayMonthName} ${sunday.getDate()}, ${year}`;
+        }
     }
 };
 

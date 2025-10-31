@@ -15,6 +15,10 @@ interface AssignStudentModalProps {
 const AssignStudentModal: React.FC<AssignStudentModalProps> = ({ part, students, weekId, allAssignments, onClose, onAssign, customRequirementsForPart }) => {
 
   const qualifiedStudents = useMemo(() => {
+    // First, filter students based on part requirements
+    const filteredStudents = getQualifiedStudents(part, students, customRequirementsForPart);
+
+    // Then, calculate current load for this week for sorting purposes
     const studentLoad: Record<string, number> = {};
     students.forEach(s => (studentLoad[s.id] = 0));
     Object.values(allAssignments)
@@ -24,7 +28,16 @@ const AssignStudentModal: React.FC<AssignStudentModalProps> = ({ part, students,
                 studentLoad[a.student.id]++;
             }
         });
-    return getQualifiedStudents(part, students, studentLoad, customRequirementsForPart);
+        
+    // Finally, sort the filtered list by load for display in the modal
+    return filteredStudents.sort((a, b) => {
+        const loadA = studentLoad[a.id] || 0;
+        const loadB = studentLoad[b.id] || 0;
+        if (loadA !== loadB) {
+            return loadA - loadB;
+        }
+        return a.nome.localeCompare(b.nome);
+    });
   }, [part, students, weekId, allAssignments, customRequirementsForPart]);
 
   return (

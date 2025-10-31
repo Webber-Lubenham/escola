@@ -21,15 +21,15 @@ export const PART_TYPE_INSTRUCTIONS: { [key: string]: string } = {
     "student_talk": `This is a talk for a male student given to the congregation. It should focus on how to apply a specific point or verse from the 'Love People' brochure in the ministry.`,
 };
 
-export const PRIVILEGE_LIST: { key: keyof Student['privileges']; label: string }[] = [
-    { key: 'chairman', label: 'Chairman' },
-    { key: 'pray', label: 'Prayer' },
-    { key: 'treasures', label: 'Treasures Talk' },
-    { key: 'gems', label: 'Spiritual Gems' },
-    { key: 'reading', label: 'Bible Reading' },
-    { key: 'talk', label: 'Student Talk' },
-    { key: 'startingConversation', label: 'Starting Conversation' },
-    { key: 'followingUp', label: 'Following Up' },
-    { key: 'makingDisciples', label: 'Making Disciples' },
-    { key: 'explainingBeliefs', label: 'Explaining Beliefs' },
+export const PRIVILEGE_LIST: { key: keyof Student['privileges']; label: string; description: string }[] = [
+    { key: 'chairman', label: 'Chairman', description: 'Serves as chairman for the Life and Ministry Meeting.' },
+    { key: 'pray', label: 'Prayer', description: 'Offers opening or closing prayers for the meeting.' },
+    { key: 'treasures', label: 'Treasures Talk', description: 'Gives the "Treasures from God’s Word" talk (appointed brothers).' },
+    { key: 'gems', label: 'Spiritual Gems', description: 'Handles the "Spiritual Gems" Q&A part (appointed brothers).' },
+    { key: 'reading', label: 'Bible Reading', description: 'Handles the 4-minute Bible Reading (male students).' },
+    { key: 'talk', label: 'Student Talk', description: 'Gives a student talk to the congregation (male students).' },
+    { key: 'startingConversation', label: 'Starting Conversation', description: 'Demonstrates starting a conversation in the ministry.' },
+    { key: 'followingUp', label: 'Following Up', description: 'Demonstrates how to follow up on a previous conversation.' },
+    { key: 'makingDisciples', label: 'Making Disciples', description: 'Demonstrates conducting a segment of a Bible study.' },
+    { key: 'explainingBeliefs', label: 'Explaining Beliefs', description: 'Demonstrates explaining a specific belief to a householder.' },
 ];
