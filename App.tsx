@@ -174,8 +174,7 @@ const App: React.FC = () => {
     });
   };
   
-  const handleAddStudent = (newStudentData: Omit<Student, 'id'>) => {
-    const newStudent: Student = { ...newStudentData, id: crypto.randomUUID() };
+  const handleAddStudent = (newStudent: Student) => {
     setStudents(prev => [...prev, newStudent]);
   };
   

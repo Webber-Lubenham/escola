@@ -4,7 +4,7 @@ import { ICONS, PRIVILEGE_LIST } from '../constants';
 import AssignStudentModal from './AssignStudentModal';
 import TipsModal from './TipsModal';
 import RequirementsModal from './RequirementsModal';
-import { isStudentPart } from '../utils/studentUtils';
+import { isAssignablePart } from '../utils/studentUtils';
 
 interface ProgramViewProps {
   program: WeeklyProgram;
@@ -108,7 +108,8 @@ const ProgramView: React.FC<ProgramViewProps> = ({ program, assignments, student
                         {assignment ? (
                           <div className="flex items-center space-x-2">
                              <div className="flex items-center gap-2">
-                                <span className="font-medium text-gray-800">{assignment.student.nome} {assignment.student.familia}</span>
+                                {/* FIX: Property 'familia' does not exist on type 'Student'. The 'nome' property contains the full name. */}
+                                <span className="font-medium text-gray-800">{assignment.student.nome}</span>
                                 <select 
                                     value={assignment.status} 
                                     onChange={(e) => onUpdateAssignmentStatus(part.idParte, program.idSemana, e.target.value as Assignment['status'])}
@@ -124,20 +125,20 @@ const ProgramView: React.FC<ProgramViewProps> = ({ program, assignments, student
                              </button>
                           </div>
                         ) : (
-                          isStudentPart(part) && (
+                          isAssignablePart(part) && (
                             <button onClick={() => handleOpenAssignModal(part)} className="px-4 py-2 text-sm font-semibold bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors shadow-sm">
                               Assign
                             </button>
                           )
                         )}
-                        {isStudentPart(part) && (
+                        {isAssignablePart(part) && (
                           <button onClick={() => handleOpenRequirementsModal(part)} className="p-2 text-gray-400 hover:text-blue-600 rounded-full hover:bg-gray-100 transition-colors" title="Set Custom Requirements">
-                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0L8 5.45c-.4.36-1.8.82-2.14 1.04-.6.38-1.04 1-1.04 1.7_-.02.72.43 1.33 1.04 1.7_2.14.34 1.74.68 2.14 1.04l.51.51c.36.4_82_1.8_1.04_2.14.6.38 1.33.43 1.7 1.04.72.02 1-1.04 1.7_-.38-2.14-.68-1.74-1.04-2.14l-.51-.51c-.4-.36-1.8-.82-2.14-1.04a1 1 0 0 1 0-1.9_3.96_3.96_0_0_0_2.14-1.04l.51-.51c.36-.4.82-1.8 1.04-2.14.38-.6 1-1.04 1.7-1.04.72.02 1.33.43 1.7 1.04.34 2.14.68 1.74 1.04 2.14l.51.51c.36.4.82 1.8 1.04 2.14.38.6 1.04 1 1.04 1.7.02.72-.43 1.33-1.04 1.7_-.38_2.14-.68_1.74-1.04_2.14l-.51.51zM10 12a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" /><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.33 5.33a.67.67 0 00-.58.33c-1.38.38-2.4 1.4-2.78 2.78a.67.67 0 00.33.58c.38 1.38 1.4 2.4 2.78 2.78.25.07.48 0 .58-.33.38-1.38 1.4-2.4 2.78-2.78a.67.67 0 00-.33-.58c-1.38-.38-2.4-1.4-2.78-2.78a.67.67 0 00-.58-.33z" /></svg>
+                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0L8 5.45c-.4.36-.82.82-1.13 1.27l-.21.32c-.31.47-.62.98-.91 1.52l-.21.39c-.29.54-.56 1.12-.8 1.71l-.17.42c-.24.59-.44 1.22-.61 1.87l-.11.41c-.17.65-.29 1.33-.37 2.02l-.04.34c-.08.68-.11 1.38-.11 2.09s.03 1.41.11 2.09l.04.34c.08.69.2 1.37.37 2.02l.11.41c.17.65.37 1.28.61 1.87l.17.42c.24.59.51 1.17.8 1.71l.21.39c.29.54.6.95.91 1.52l.21.32c.31.45.73.89 1.13 1.27l.51.51c.4.36.82.82 1.27 1.13l.32.21c.47.31.98.62 1.52.91l.39.21c.54.29 1.12.56 1.71.8l.42.17c.59.24 1.22.44 1.87.61l.41.11c.65.17 1.33.29 2.02.37l.34.04c.68.08 1.38.11 2.09.11s1.41-.03 2.09-.11l.34-.04c.69-.08 1.37-.2 2.02-.37l.41-.11c.65-.17 1.28-.37 1.87-.61l.42-.17c.59-.24 1.17-.51 1.71-.8l.39-.21c.54-.29.95-.6 1.52-.91l.32-.21c.45-.31.89-.73 1.27-1.13l.51-.51c.36-.4.82-.82 1.13-1.27l.21-.32c.31-.47.62-.98.91-1.52l.21-.39c.29-.54.56-1.12.8-1.71l.17-.42c.24-.59.44-1.22.61-1.87l.11-.41c.17-.65.29-1.33.37-2.02l.04-.34c.08-.68.11-1.38-.11-2.09s-.03-1.41-.11-2.09l-.04-.34c-.08-.69-.2-1.37-.37-2.02l-.11-.41c-.17-.65-.37-1.28-.61-1.87l-.17-.42c-.24-.59-.51-1.17-.8-1.71l-.21-.39c-.29-.54-.6-.95-.91-1.52l-.21-.32c-.31-.45-.73-.89-1.13-1.27l-.51-.51zM10 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
                           </button>
                         )}
                       </div>
                     </div>
-                     {isStudentPart(part) && (
+                     {isAssignablePart(part) && (
                       <div className="mt-3 text-right">
                           <button onClick={() => handleOpenTipsModal(part)} className="inline-flex items-center space-x-1 text-sm text-blue-600 hover:underline">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

@@ -8,7 +8,7 @@ import { studentRoleLabels } from '../i18n';
 interface StudentListProps {
   students: Student[];
   assignments: Record<string, Assignment>;
-  onAddStudent: (studentData: Omit<Student, 'id'>) => void;
+  onAddStudent: (student: Student) => void;
   onUpdateStudent: (student: Student) => void;
   onDeleteStudent: (studentId: string) => void;
   onImportStudents: (students: Student[]) => void;
@@ -41,13 +41,18 @@ const StudentList: React.FC<StudentListProps> = ({ students, assignments, onAddS
     if ('id' in studentData) {
       onUpdateStudent(studentData);
     } else {
-      onAddStudent(studentData);
+      const newStudentWithId: Student = { ...studentData, id: crypto.randomUUID() };
+      onAddStudent(newStudentWithId);
     }
     handleCloseEditModal();
   };
   
-  const handleConfirmImport = (importedStudents: Student[]) => {
-    onImportStudents(importedStudents);
+  const handleConfirmImport = (importedStudentsData: Omit<Student, 'id'>[]) => {
+    const studentsWithIds = importedStudentsData.map(s => ({
+        ...s,
+        id: crypto.randomUUID(),
+    }));
+    onImportStudents(studentsWithIds);
     setIsImportModalOpen(false);
   };
 
@@ -104,17 +109,23 @@ const StudentList: React.FC<StudentListProps> = ({ students, assignments, onAddS
         <ul className="space-y-3 max-h-[600px] overflow-y-auto">
           {students.map(student => {
             const roleLabel = student.cargo ? studentRoleLabels.en[student.cargo] : (student.gender === 'male' ? 'Brother' : 'Sister');
+            const nameParts = student.nome.trim().split(/\s+/);
+            let initials = '';
+            if (nameParts.length > 0 && nameParts[0]) { initials += nameParts[0][0]; }
+            if (nameParts.length > 1 && nameParts[nameParts.length - 1]) { initials += nameParts[nameParts.length - 1][0]; }
+            else if (nameParts.length === 1 && nameParts[0].length > 1) { initials += nameParts[0][1]; }
+            
             return (
               <li key={student.id} className="p-3 bg-gray-50 rounded-md flex items-center justify-between group">
                  <div className="flex items-center space-x-3">
                       <div className="relative">
                           <div className="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-lg flex-shrink-0">
-                              {student.nome.charAt(0)}{student.familia.charAt(0)}
+                              {initials.toUpperCase()}
                           </div>
                           <span className={`absolute bottom-0 right-0 block h-3 w-3 rounded-full ring-2 ring-white ${student.ativo ? 'bg-green-400' : 'bg-gray-400'}`} title={student.ativo ? 'Active' : 'Inactive'}></span>
                       </div>
                       <div>
-                          <p className="font-semibold text-gray-800">{student.nome} {student.familia}</p>
+                          <p className="font-semibold text-gray-800">{student.nome}</p>
                           <p className="text-sm text-gray-500">
                              {roleLabel}
                           </p>
@@ -156,7 +167,7 @@ const StudentList: React.FC<StudentListProps> = ({ students, assignments, onAddS
        {isConfirmModalOpen && studentToDelete && (
           <ConfirmationModal
             title="Delete Student"
-            message={`Are you sure you want to delete ${studentToDelete.nome} ${studentToDelete.familia}? This will unassign them from all parts and cannot be undone.`}
+            message={`Are you sure you want to delete ${studentToDelete.nome}? This will unassign them from all parts and cannot be undone.`}
             confirmText="Delete"
             onConfirm={handleConfirmDelete}
             onClose={handleCloseConfirmModal}

@@ -1,19 +1,25 @@
 import { Assignment, WeeklyProgram, Student, MeetingPart, AutoAssignResult, CustomRequirements, RequiredPrivileges, UnassignedPartInfo } from '../types';
-import { isStudentPart, getQualifiedStudents } from './studentUtils';
+import { isAssignablePart, getQualifiedStudents } from './studentUtils';
 
 const findQualificationBottleneck = (
     part: MeetingPart,
     students: Student[],
     customRequirementsForPart?: RequiredPrivileges
 ): string => {
+    // Role check for appointed parts
+    if (part.tipo === 'talk' || part.tipo === 'gems') {
+        const hasAppointedMen = students.some(s => s.gender === 'male' && (s.cargo === 'anciao' || s.cargo === 'servo_ministerial'));
+        if (!hasAppointedMen) {
+            return 'No Elders or Ministerial Servants are available in the student list.';
+        }
+    }
+
     // Gender check
     if (part.restricoes?.genero) {
         if (part.restricoes.genero === 'M') {
-            // FIX: Property 'isMale' does not exist on type 'privileges'. Check student.gender instead.
             const hasGenderMatch = students.some(s => s.gender === 'male');
             if (!hasGenderMatch) return 'No male students exist in the student list.';
         } else { // 'F'
-            // FIX: Property 'isMale' does not exist on type 'privileges'. Check student.gender instead.
             const hasGenderMatch = students.some(s => s.gender === 'female');
             if (!hasGenderMatch) return 'No female students exist in the student list.';
         }
@@ -47,7 +53,7 @@ const findQualificationBottleneck = (
         }
     }
 
-    return 'No students meet the combined qualification criteria (gender, default, and custom privileges).';
+    return 'No students meet the combined qualification criteria (role, gender, privileges).';
 };
 
 
@@ -59,9 +65,9 @@ export const autoAssign = (
 ): AutoAssignResult => {
     const allProgramParts = program.programacao.flatMap(section => section.partes);
 
-    const studentParts = allProgramParts.filter(isStudentPart);
+    const assignableParts = allProgramParts.filter(isAssignablePart);
 
-    const unassignedStudentParts = studentParts.filter(
+    const unassignedPartsToAutoAssign = assignableParts.filter(
         part => !currentAssignments[`${program.idSemana}-${part.idParte}`]
     );
 
@@ -78,7 +84,7 @@ export const autoAssign = (
     const unassignedParts: UnassignedPartInfo[] = [];
 
     // Prioritize parts with fewer qualified candidates to solve for the hardest parts first
-    const sortedParts = [...unassignedStudentParts].sort((a, b) => {
+    const sortedParts = [...unassignedPartsToAutoAssign].sort((a, b) => {
         const keyA = `${program.idSemana}-${a.idParte}`;
         const keyB = `${program.idSemana}-${b.idParte}`;
         const candidatesA = getQualifiedStudents(a, students, studentLoad, customRequirements[keyA]).length;

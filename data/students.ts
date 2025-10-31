@@ -3,8 +3,7 @@ import { Student } from '../types';
 export const students: Student[] = [
   {
     "id": "bc7ff6af-57a7-4421-9d0b-28bb8a51f682",
-    "nome": "Carla",
-    "familia": "Almeida",
+    "nome": "Carla Almeida",
     "gender": "female",
     "email": "carla.almeida@exemplo.com",
     "telefone": "(78) 9861-9772",
@@ -31,8 +30,7 @@ export const students: Student[] = [
   },
   {
     "id": "68087fd5-2aa2-4719-90a9-ad8d4c84421c",
-    "nome": "Thiago",
-    "familia": "Almeida",
+    "nome": "Thiago Almeida",
     "gender": "male",
     "email": "thiago.almeida@exemplo.com",
     "telefone": "(50) 9214-8715",
@@ -58,8 +56,7 @@ export const students: Student[] = [
   },
   {
     "id": "452fb5fa-fcdc-4763-b911-bdabc60d06f3",
-    "nome": "Lucas",
-    "familia": "Almeida",
+    "nome": "Lucas Almeida",
     "gender": "male",
     "email": "lucas.almeida@exemplo.com",
     "telefone": "(25) 9499-7079",
@@ -86,8 +83,7 @@ export const students: Student[] = [
   },
   {
     "id": "78814c76-75b0-42ae-bb7c-9a8f0a3e5919",
-    "nome": "Eduardo",
-    "familia": "Almeida",
+    "nome": "Eduardo Almeida",
     "gender": "male",
     "email": "eduardo.almeida@exemplo.com",
     "telefone": "(43) 9590-1286",
@@ -113,8 +109,7 @@ export const students: Student[] = [
   },
   {
     "id": "e688fa12-a0f3-42e7-a07c-f74acae30721",
-    "nome": "Gabriel",
-    "familia": "Costa",
+    "nome": "Gabriel Costa",
     "gender": "male",
     "email": "gabriel.costa@exemplo.com",
     "telefone": "(27) 9626-6168",
@@ -140,8 +135,7 @@ export const students: Student[] = [
   },
   {
     "id": "f51b7aa7-c266-476b-ae3c-de8cdffbb658",
-    "nome": "Juliana",
-    "familia": "Costa",
+    "nome": "Juliana Costa",
     "gender": "female",
     "email": "juliana.costa@exemplo.com",
     "telefone": "(14) 9032-3332",
@@ -167,8 +161,7 @@ export const students: Student[] = [
   },
   {
     "id": "71bec071-86a9-473c-b0ff-1564447591d5",
-    "nome": "Rafael",
-    "familia": "Costa",
+    "nome": "Rafael Costa",
     "gender": "male",
     "email": "rafael.costa@exemplo.com",
     "telefone": "(26) 9738-6724",
@@ -194,8 +187,7 @@ export const students: Student[] = [
   },
   {
     "id": "26732927-f9a2-4ff1-8cbd-5ef00c65b473",
-    "nome": "Patrícia",
-    "familia": "Costa",
+    "nome": "Patrícia Costa",
     "gender": "female",
     "email": "patrícia.costa@exemplo.com",
     "telefone": "(23) 9771-8243",
@@ -221,8 +213,7 @@ export const students: Student[] = [
   },
   {
     "id": "1b534bad-aee1-41fd-b60d-7fdd09c59f53",
-    "nome": "Patrícia",
-    "familia": "Costa",
+    "nome": "Patrícia Costa",
     "gender": "female",
     "email": "patrícia.costa@exemplo.com",
     "telefone": "(35) 9741-7381",
@@ -248,8 +239,7 @@ export const students: Student[] = [
   },
   {
     "id": "f99b740d-1e52-4ddc-b6d8-2ea0573aff98",
-    "nome": "Carla",
-    "familia": "Goes",
+    "nome": "Carla Goes",
     "gender": "female",
     "email": "carla.oliveira@exemplo.com",
     "telefone": "(77) 9686-5721",
@@ -275,8 +265,7 @@ export const students: Student[] = [
   },
   {
     "id": "466ff560-9571-44e3-b6a4-ace8bf416bc8",
-    "nome": "Beatriz",
-    "familia": "Goes",
+    "nome": "Beatriz Goes",
     "gender": "female",
     "email": "beatriz.oliveira@exemplo.com",
     "telefone": "(18) 9811-1856",
@@ -302,8 +291,7 @@ export const students: Student[] = [
   },
   {
     "id": "a90829fb-9b35-450d-832c-5d9bf8647153",
-    "nome": "Carla",
-    "familia": "Goes",
+    "nome": "Carla Goes",
     "gender": "female",
     "email": "carla.oliveira@exemplo.com",
     "telefone": "(20) 9047-8494",
@@ -329,8 +317,7 @@ export const students: Student[] = [
   },
   {
     "id": "01947e19-20be-4a02-a6a5-ae891d9838f8",
-    "nome": "Thiago",
-    "familia": "Gomes",
+    "nome": "Thiago Gomes",
     "gender": "male",
     "email": "thiago.gomes@exemplo.com",
     "telefone": "(73) 9170-2400",
@@ -356,8 +343,7 @@ export const students: Student[] = [
   },
   {
     "id": "89d16832-d63e-44c6-9b8a-0881d52d8fd5",
-    "nome": "Lucas",
-    "familia": "Gomes",
+    "nome": "Lucas Gomes",
     "gender": "male",
     "email": "lucas.gomes@exemplo.com",
     "telefone": "(26) 9713-6971",
@@ -383,8 +369,7 @@ export const students: Student[] = [
   },
   {
     "id": "adbd2a20-eb23-4865-9849-3ea88de706ca",
-    "nome": "Felipe",
-    "familia": "Gomes",
+    "nome": "Felipe Gomes",
     "gender": "male",
     "email": "felipe.gomes@exemplo.com",
     "telefone": "(77) 9688-3087",
@@ -410,8 +395,7 @@ export const students: Student[] = [
   },
   {
     "id": "676f2d67-2c0b-4cdd-b620-380232dbbd3f",
-    "nome": "Camila",
-    "familia": "Lira",
+    "nome": "Camila Lira",
     "gender": "female",
     "email": "camila.silva@exemplo.com",
     "telefone": "(81) 9046-2247",
@@ -437,8 +421,7 @@ export const students: Student[] = [
   },
   {
     "id": "41984385-ff74-4a80-8dc1-203db8c38336",
-    "nome": "Luana",
-    "familia": "Lira",
+    "nome": "Luana Lira",
     "gender": "female",
     "email": "luana.silva@exemplo.com",
     "telefone": "(76) 9173-6162",
@@ -464,8 +447,7 @@ export const students: Student[] = [
   },
   {
     "id": "d0940a31-18fd-4fa6-9bc5-3d6ff691ec7f",
-    "nome": "Larissa",
-    "familia": "Martins",
+    "nome": "Larissa Martins",
     "gender": "female",
     "email": "larissa.martins@exemplo.com",
     "telefone": "(81) 9820-9919",
@@ -491,8 +473,7 @@ export const students: Student[] = [
   },
   {
     "id": "44c3a263-8026-441f-88de-f48d9553e12c",
-    "nome": "Mateus",
-    "familia": "Martins",
+    "nome": "Mateus Martins",
     "gender": "male",
     "email": "mateus.martins@exemplo.com",
     "telefone": "(39) 9665-1554",
@@ -518,8 +499,7 @@ export const students: Student[] = [
   },
   {
     "id": "2044bc2c-b18a-45ba-84f2-78a03aa6fdbe",
-    "nome": "Luana",
-    "familia": "Martins",
+    "nome": "Luana Martins",
     "gender": "female",
     "email": "luana.martins@exemplo.com",
     "telefone": "(15) 9465-1353",
@@ -545,8 +525,7 @@ export const students: Student[] = [
   },
   {
     "id": "4149560e-f319-4db7-9b8a-822a5aa6d80f",
-    "nome": "Camila",
-    "familia": "Oliveira",
+    "nome": "Camila Oliveira",
     "gender": "female",
     "email": "camila.oliveira@exemplo.com",
     "telefone": "(27) 9915-4045",
@@ -572,8 +551,7 @@ export const students: Student[] = [
   },
   {
     "id": "827cae32-4946-4330-a640-5f563afb3740",
-    "nome": "Juliana",
-    "familia": "Oliveira",
+    "nome": "Juliana Oliveira",
     "gender": "female",
     "email": "juliana.oliveira@exemplo.com",
     "telefone": "(29) 9680-8144",
@@ -599,8 +577,7 @@ export const students: Student[] = [
   },
   {
     "id": "8bc30d3d-0275-44f3-a8d7-19eb969a4df0",
-    "nome": "Rafael",
-    "familia": "Oliveira",
+    "nome": "Rafael Oliveira",
     "gender": "male",
     "email": "rafael.oliveira@exemplo.com",
     "telefone": "(64) 9974-8454",
@@ -626,8 +603,7 @@ export const students: Student[] = [
   },
   {
     "id": "b2e5aceb-a260-4a60-9958-450ae182e007",
-    "nome": "Thiago",
-    "familia": "Pereira",
+    "nome": "Thiago Pereira",
     "gender": "male",
     "email": "thiago.pereira@exemplo.com",
     "telefone": "(34) 9303-2785",
@@ -653,8 +629,7 @@ export const students: Student[] = [
   },
   {
     "id": "a523cb48-10c5-4c5f-a96a-59d723246a16",
-    "nome": "André",
-    "familia": "Pereira",
+    "nome": "André Pereira",
     "gender": "male",
     "email": "andré.pereira@exemplo.com",
     "telefone": "(84) 9102-1388",
@@ -680,8 +655,7 @@ export const students: Student[] = [
   },
   {
     "id": "22b50d36-1a95-4d86-ad60-f4e0cd14fa77",
-    "nome": "Mateus",
-    "familia": "Pereira",
+    "nome": "Mateus Pereira",
     "gender": "male",
     "email": "mateus.pereira@exemplo.com",
     "telefone": "(90) 9166-4594",
@@ -707,8 +681,7 @@ export const students: Student[] = [
   },
   {
     "id": "d284a683-052d-4b0f-9dcf-34d485236159",
-    "nome": "Beatriz",
-    "familia": "Pereira",
+    "nome": "Beatriz Pereira",
     "gender": "female",
     "email": "beatriz.pereira@exemplo.com",
     "telefone": "(80) 9689-3203",
@@ -734,8 +707,7 @@ export const students: Student[] = [
   },
   {
     "id": "9c5e769e-39bf-4f90-9057-7a8b4a33eff9",
-    "nome": "Mateus",
-    "familia": "Pereira",
+    "nome": "Mateus Pereira",
     "gender": "male",
     "email": "mateus.pereira@exemplo.com",
     "telefone": "(76) 9502-8698",
@@ -761,8 +733,7 @@ export const students: Student[] = [
   },
   {
     "id": "0b3ee67e-aff2-4f84-bfdf-4f64e45007e5",
-    "nome": "Juliana",
-    "familia": "Rodrigues",
+    "nome": "Juliana Rodrigues",
     "gender": "female",
     "email": "juliana.rodrigues@exemplo.com",
     "telefone": "(68) 9736-8924",
@@ -788,8 +759,7 @@ export const students: Student[] = [
   },
   {
     "id": "a65801ed-7fdc-47f0-8872-d61a2eb2cb91",
-    "nome": "Patrícia",
-    "familia": "Rodrigues",
+    "nome": "Patrícia Rodrigues",
     "gender": "female",
     "email": "patrícia.rodrigues@exemplo.com",
     "telefone": "(15) 9469-1776",
@@ -815,8 +785,7 @@ export const students: Student[] = [
   },
   {
     "id": "6a198cc8-a702-4263-bc90-5c062eb0b9aa",
-    "nome": "Fernanda",
-    "familia": "Rodrigues",
+    "nome": "Fernanda Rodrigues",
     "gender": "female",
     "email": "fernanda.rodrigues@exemplo.com",
     "telefone": "(17) 9710-6770",
@@ -842,8 +811,7 @@ export const students: Student[] = [
   },
   {
     "id": "df3f4702-700f-4df5-b4d6-43c247f3eed4",
-    "nome": "Larissa",
-    "familia": "Rodrigues",
+    "nome": "Larissa Rodrigues",
     "gender": "female",
     "email": "larissa.rodrigues@exemplo.com",
     "telefone": "(44) 9571-9833",
@@ -869,8 +837,7 @@ export const students: Student[] = [
   },
   {
     "id": "7e5cddb0-5905-4ebf-9ef6-4836d8c0a582",
-    "nome": "Fernanda",
-    "familia": "Rodrigues",
+    "nome": "Fernanda Rodrigues",
     "gender": "female",
     "email": "fernanda.rodrigues@exemplo.com",
     "telefone": "(22) 9834-7249",
@@ -896,8 +863,7 @@ export const students: Student[] = [
   },
   {
     "id": "62d87563-22b8-47b0-84aa-40cd11f97da1",
-    "nome": "Felipe",
-    "familia": "Santos",
+    "nome": "Felipe Santos",
     "gender": "male",
     "email": "felipe.santos@exemplo.com",
     "telefone": "(67) 9428-6089",
@@ -923,8 +889,7 @@ export const students: Student[] = [
   },
   {
     "id": "365c7ae5-0526-4ee3-95fd-a8832d46b765",
-    "nome": "Fernanda",
-    "familia": "Santos",
+    "nome": "Fernanda Santos",
     "gender": "female",
     "email": "fernanda.santos@exemplo.com",
     "telefone": "(41) 9620-9426",
@@ -950,8 +915,7 @@ export const students: Student[] = [
   },
   {
     "id": "004f392b-289a-4f07-a0d5-f9ae48949f89",
-    "nome": "Pedro",
-    "familia": "Silva",
+    "nome": "Pedro Silva",
     "gender": "male",
     "email": "pedro.silva@exemplo.com",
     "telefone": "(48) 9334-2087",
@@ -977,8 +941,7 @@ export const students: Student[] = [
   },
   {
     "id": "39275d7e-ac0f-4653-a086-64f06038f4d5",
-    "nome": "Lucas",
-    "familia": "Silva",
+    "nome": "Lucas Silva",
     "gender": "male",
     "email": "lucas.silva@exemplo.com",
     "telefone": "(70) 9312-1338",
@@ -1004,8 +967,7 @@ export const students: Student[] = [
   },
   {
     "id": "2f0d9f93-8da4-4f6d-be07-ec6aadc9e058",
-    "nome": "André",
-    "familia": "Silva",
+    "nome": "André Silva",
     "gender": "male",
     "email": "andré.silva@exemplo.com",
     "telefone": "(18) 9345-6871",
@@ -1031,8 +993,7 @@ export const students: Student[] = [
   },
   {
     "id": "7ff2bb4e-e321-4259-8187-e08c62f80b72",
-    "nome": "Luana",
-    "familia": "Souza",
+    "nome": "Luana Souza",
     "gender": "female",
     "email": "luana.souza@exemplo.com",
     "telefone": "(34) 9048-7507",
@@ -1058,8 +1019,7 @@ export const students: Student[] = [
   },
   {
     "id": "7de1bdf0-c7fc-4b57-a419-fb84cb448736",
-    "nome": "Eduardo",
-    "familia": "Souza",
+    "nome": "Eduardo Souza",
     "gender": "male",
     "email": "eduardo.souza@exemplo.com",
     "telefone": "(20) 9315-6940",
@@ -1085,8 +1045,7 @@ export const students: Student[] = [
   },
   {
     "id": "a48db821-03a4-444d-bb28-8c71ab857ad4",
-    "nome": "Rafael",
-    "familia": "Souza",
+    "nome": "Rafael Souza",
     "gender": "male",
     "email": "rafael.souza@exemplo.com",
     "telefone": "(64) 9446-2722",
@@ -1112,8 +1071,7 @@ export const students: Student[] = [
   },
   {
     "id": "ea9e6ab4-2c6a-4cd7-9af1-2d672513a3f3",
-    "nome": "Gabriel",
-    "familia": "Souza",
+    "nome": "Gabriel Souza",
     "gender": "male",
     "email": "gabriel.souza@exemplo.com",
     "telefone": "(97) 9889-3124",
@@ -1139,8 +1097,7 @@ export const students: Student[] = [
   },
   {
     "id": "70f841ca-513c-4a8c-a8b2-9b5834f0dfa3",
-    "nome": "Beatriz",
-    "familia": "Souza",
+    "nome": "Beatriz Souza",
     "gender": "female",
     "email": "beatriz.souza@exemplo.com",
     "telefone": "(84) 9521-8091",
@@ -1166,8 +1123,7 @@ export const students: Student[] = [
   },
   {
     "id": "4326262b-38a5-4090-8d86-d4db19ce34cd",
-    "nome": "Felipe",
-    "familia": "Almeida",
+    "nome": "Felipe Almeida",
     "gender": "male",
     "email": "felipe.almeida@exemplo.com",
     "telefone": "(72) 9774-9456",
@@ -1193,8 +1149,7 @@ export const students: Student[] = [
   },
   {
     "id": "241f1751-5c5e-45bc-a706-bafec85964d1",
-    "nome": "Larissa",
-    "familia": "Almeida",
+    "nome": "Larissa Almeida",
     "gender": "female",
     "email": "larissa.almeida@exemplo.com",
     "telefone": "(22) 9497-9319",
@@ -1220,8 +1175,7 @@ export const students: Student[] = [
   },
   {
     "id": "3402821f-896a-4e10-b7a6-a75e76b73308",
-    "nome": "Fernanda",
-    "familia": "Almeida",
+    "nome": "Fernanda Almeida",
     "gender": "female",
     "email": "fernanda.almeida@exemplo.com",
     "telefone": "(14) 9223-4614",
@@ -1247,8 +1201,7 @@ export const students: Student[] = [
   },
   {
     "id": "8da956cb-4963-46a4-810d-2e45b6baebba",
-    "nome": "Fernanda",
-    "familia": "Almeida",
+    "nome": "Fernanda Almeida",
     "gender": "female",
     "email": "fernanda.almeida@exemplo.com",
     "telefone": "(83) 9789-6598",
@@ -1274,8 +1227,7 @@ export const students: Student[] = [
   },
   {
     "id": "11c5bc9d-5476-483f-b4f0-537ed70ade51",
-    "nome": "Carla",
-    "familia": "Costa",
+    "nome": "Carla Costa",
     "gender": "female",
     "email": "carla.costa@exemplo.com",
     "telefone": "(35) 9718-7655",
@@ -1301,8 +1253,7 @@ export const students: Student[] = [
   },
   {
     "id": "2bc9a48b-ffc0-422e-8f7d-cfba3dd8bb27",
-    "nome": "Ana",
-    "familia": "Costa",
+    "nome": "Ana Costa",
     "gender": "female",
     "email": "ana.costa@exemplo.com",
     "telefone": "(11) 9913-5036",
@@ -1328,8 +1279,7 @@ export const students: Student[] = [
   },
   {
     "id": "1d559a4c-ca3e-402d-8e88-ce11ea1b7534",
-    "nome": "Beatriz",
-    "familia": "Costa",
+    "nome": "Beatriz Costa",
     "gender": "female",
     "email": "beatriz.costa@exemplo.com",
     "telefone": "(37) 9403-8582",
@@ -1355,8 +1305,7 @@ export const students: Student[] = [
   },
   {
     "id": "9cec2b6e-8de8-4a89-abb2-a441491b6ade",
-    "nome": "Beatriz",
-    "familia": "Costa",
+    "nome": "Beatriz Costa",
     "gender": "female",
     "email": "beatriz.costa@exemplo.com",
     "telefone": "(19) 9407-6260",
@@ -1382,8 +1331,7 @@ export const students: Student[] = [
   },
   {
     "id": "9c7ca55c-544e-49ee-844a-e2c7dc8909b3",
-    "nome": "Juliana",
-    "familia": "Goes",
+    "nome": "Juliana Goes",
     "gender": "female",
     "email": "juliana.oliveira@exemplo.com",
     "telefone": "(46) 9210-9317",
@@ -1409,8 +1357,7 @@ export const students: Student[] = [
   },
   {
     "id": "69009ef3-2be5-4cc4-9914-6862c174ca87",
-    "nome": "Carla",
-    "familia": "Goes",
+    "nome": "Carla Goes",
     "gender": "female",
     "email": "carla.oliveira@exemplo.com",
     "telefone": "(36) 9364-9506",
@@ -1436,8 +1383,7 @@ export const students: Student[] = [
   },
   {
     "id": "b88f6190-0194-414f-b85e-68823d68a317",
-    "nome": "Juliana",
-    "familia": "Goes",
+    "nome": "Juliana Goes",
     "gender": "female",
     "email": "juliana.oliveira@exemplo.com",
     "telefone": "(26) 9170-7769",
@@ -1463,8 +1409,7 @@ export const students: Student[] = [
   },
   {
     "id": "c4ea1bae-1053-47e3-9274-13a8a050b15f",
-    "nome": "André",
-    "familia": "Gomes",
+    "nome": "André Gomes",
     "gender": "male",
     "email": "andré.gomes@exemplo.com",
     "telefone": "(33) 9428-9154",
@@ -1490,8 +1435,7 @@ export const students: Student[] = [
   },
   {
     "id": "014e0c2e-7e15-484c-bea8-fc6e72e8bc5d",
-    "nome": "Camila",
-    "familia": "Gomes",
+    "nome": "Camila Gomes",
     "gender": "female",
     "email": "camila.gomes@exemplo.com",
     "telefone": "(55) 9002-6972",
@@ -1517,8 +1461,7 @@ export const students: Student[] = [
   },
   {
     "id": "4b516198-87a2-436a-81a4-2f382222f577",
-    "nome": "Eduardo",
-    "familia": "Gomes",
+    "nome": "Eduardo Gomes",
     "gender": "male",
     "email": "eduardo.gomes@exemplo.com",
     "telefone": "(45) 9579-9996",
@@ -1544,8 +1487,7 @@ export const students: Student[] = [
   },
   {
     "id": "f572c9f6-65d4-4420-ba52-d738b310a87f",
-    "nome": "Larissa",
-    "familia": "Gomes",
+    "nome": "Larissa Gomes",
     "gender": "female",
     "email": "larissa.gomes@exemplo.com",
     "telefone": "(19) 9575-6413",
@@ -1571,8 +1513,7 @@ export const students: Student[] = [
   },
   {
     "id": "2696a455-4c1e-423a-af9d-e47154e5fa0f",
-    "nome": "Larissa",
-    "familia": "Gomes",
+    "nome": "Larissa Gomes",
     "gender": "female",
     "email": "larissa.gomes@exemplo.com",
     "telefone": "(18) 9886-4202",
@@ -1598,8 +1539,7 @@ export const students: Student[] = [
   },
   {
     "id": "537ac03e-6c9f-4e33-8001-9a2e6e2a21b2",
-    "nome": "Felipe",
-    "familia": "Lira",
+    "nome": "Felipe Lira",
     "gender": "male",
     "email": "felipe.silva@exemplo.com",
     "telefone": "(42) 9260-7036",
@@ -1625,8 +1565,7 @@ export const students: Student[] = [
   },
   {
     "id": "2768d013-8aec-4f80-a3f6-c63bd0fc3549",
-    "nome": "Felipe",
-    "familia": "Lira",
+    "nome": "Felipe Lira",
     "gender": "male",
     "email": "felipe.silva@exemplo.com",
     "telefone": "(24) 9656-2787",
@@ -1652,8 +1591,7 @@ export const students: Student[] = [
   },
   {
     "id": "20ef364c-b703-4405-861d-f39ebd0b3251",
-    "nome": "Lucas",
-    "familia": "Lira",
+    "nome": "Lucas Lira",
     "gender": "male",
     "email": "lucas.souza@exemplo.com",
     "telefone": "(75) 9019-4442",
@@ -1679,8 +1617,7 @@ export const students: Student[] = [
   },
   {
     "id": "deb27836-1fc3-40cc-9258-ffc9e9edc910",
-    "nome": "Lucas",
-    "familia": "Lira",
+    "nome": "Lucas Lira",
     "gender": "male",
     "email": "lucas.silva@exemplo.com",
     "telefone": "(95) 9120-2958",

@@ -14,7 +14,7 @@ const toBoolean = (value: any): boolean => {
 };
 
 
-export const parseStudentsFromExcel = (file: File): Promise<Student[]> => {
+export const parseStudentsFromExcel = (file: File): Promise<Omit<Student, 'id'>[]> => {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
 
@@ -29,21 +29,29 @@ export const parseStudentsFromExcel = (file: File): Promise<Student[]> => {
                 const worksheet = workbook.Sheets[sheetName];
                 const jsonData = xlsx.utils.sheet_to_json<any>(worksheet);
 
-                const students: Student[] = jsonData.map((row) => {
+                const students: Omit<Student, 'id'>[] = jsonData.map((row) => {
                     const normalizedRow: { [key: string]: any } = {};
                     Object.keys(row).forEach(key => {
                         normalizedRow[key.toLowerCase().trim().replace(/ /g, '')] = row[key];
                     });
                     
-                    const fullName = (normalizedRow.nome || normalizedRow.firstname || '').split(' ');
-                    const firstName = fullName[0] || '';
-                    const lastName = normalizedRow.familia || normalizedRow.sobrenome || normalizedRow.lastname || fullName.slice(1).join(' ') || '';
+                    let studentName = '';
+                    if (normalizedRow.fullname) studentName = normalizedRow.fullname;
+                    else if (normalizedRow.name) studentName = normalizedRow.name;
+                    else if (normalizedRow.studentname) studentName = normalizedRow.studentname;
+                    else if (normalizedRow.nomecompleto) studentName = normalizedRow.nomecompleto;
+                    else {
+                        const firstName = normalizedRow.nome || normalizedRow.firstname || '';
+                        const lastName = normalizedRow.familia || normalizedRow.sobrenome || normalizedRow.lastname || '';
+                        studentName = `${firstName} ${lastName}`.trim();
+                    }
 
+                    if (!studentName) {
+                        throw new Error(`Row is missing a name column ('fullname', 'name', 'nome'/'familia', etc.): ${JSON.stringify(row)}`);
+                    }
 
-                    const student: Student = {
-                        id: crypto.randomUUID(),
-                        nome: firstName,
-                        familia: lastName,
+                    const student: Omit<Student, 'id'> = {
+                        nome: studentName,
                         gender: (normalizedRow.genero || normalizedRow.gender || 'male').toLowerCase() === 'female' ? 'female' : 'male',
                         email: normalizedRow.email || '',
                         telefone: normalizedRow.telefone || normalizedRow.phone || '',
@@ -68,10 +76,6 @@ export const parseStudentsFromExcel = (file: File): Promise<Student[]> => {
                             explainingBeliefs: toBoolean(normalizedRow.explainingbeliefs || normalizedRow.explaining),
                         }
                     };
-                    
-                    if (!student.nome || !student.familia) {
-                        throw new Error(`Row is missing 'nome' or 'familia': ${JSON.stringify(row)}`);
-                    }
 
                     return student;
                 });

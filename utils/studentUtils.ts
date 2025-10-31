@@ -1,8 +1,17 @@
 import { MeetingPart, Student, RequiredPrivileges } from '../types';
 
-export const isStudentPart = (part: MeetingPart): boolean => {
-    const studentPartTypes = ['reading', 'starting_conversation', 'following_up', 'making_disciples', 'explaining_beliefs', 'student_talk'];
-    return studentPartTypes.includes(part.tipo);
+export const isAssignablePart = (part: MeetingPart): boolean => {
+    const assignablePartTypes = [
+        'talk',
+        'gems',
+        'reading',
+        'starting_conversation',
+        'following_up',
+        'making_disciples',
+        'explaining_beliefs',
+        'student_talk'
+    ];
+    return assignablePartTypes.includes(part.tipo);
 };
 
 export const getQualifiedStudents = (
@@ -12,16 +21,28 @@ export const getQualifiedStudents = (
     customRequirements?: RequiredPrivileges
 ): Student[] => {
     const qualified = students.filter(student => {
-        // Gender check
+        // Active student check
+        if (!student.ativo) {
+            return false;
+        }
+
+        // Role-based checks for appointed men parts
+        if (part.tipo === 'talk' || part.tipo === 'gems') {
+            if (student.gender !== 'male') return false;
+            const isAppointed = student.cargo === 'anciao' || student.cargo === 'servo_ministerial';
+            if (!isAppointed) return false;
+        }
+
+        // Gender check from part restrictions
         if ((part.restricoes?.genero === 'M' && student.gender !== 'male') ||
             (part.restricoes?.genero === 'F' && student.gender !== 'female')) {
             return false;
         }
 
-        // Default privilege check based on part type
+        // Default privilege check for student parts
         const defaultPrivilegeMap: Partial<Record<string, keyof Student['privileges']>> = {
             'reading': 'reading',
-            'student_talk': 'talk', // student_talk part type requires the 'talk' privilege
+            'student_talk': 'talk',
             'explaining_beliefs': 'explainingBeliefs',
             'starting_conversation': 'startingConversation',
             'following_up': 'followingUp',
@@ -42,11 +63,14 @@ export const getQualifiedStudents = (
 
         return true;
     });
-    
-    // Sort by current assignment load (ascending)
+
+    // Sort by current assignment load (ascending), then by name as a tie-breaker
     return qualified.sort((a, b) => {
         const loadA = studentLoad[a.id] || 0;
         const loadB = studentLoad[b.id] || 0;
-        return loadA - loadB;
+        if (loadA !== loadB) {
+            return loadA - loadB;
+        }
+        return a.nome.localeCompare(b.nome);
     });
 };

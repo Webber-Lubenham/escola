@@ -11,8 +11,7 @@ export type StudentRole = typeof studentRoles[number] | '';
 
 export interface Student {
   id: string;
-  nome: string;
-  familia: string;
+  nome: string; // This will now be the full name
   gender: 'male' | 'female';
   email?: string;
   telefone?: string;

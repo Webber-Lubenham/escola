@@ -3,12 +3,12 @@ import { Student } from '../types';
 import { parseStudentsFromExcel } from '../utils/excel';
 
 interface ImportStudentsModalProps {
-    onImport: (students: Student[]) => void;
+    onImport: (students: Omit<Student, 'id'>[]) => void;
     onClose: () => void;
 }
 
 const ImportStudentsModal: React.FC<ImportStudentsModalProps> = ({ onImport, onClose }) => {
-    const [students, setStudents] = useState<Student[]>([]);
+    const [students, setStudents] = useState<Omit<Student, 'id'>[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [fileName, setFileName] = useState<string>('');
@@ -26,7 +26,7 @@ const ImportStudentsModal: React.FC<ImportStudentsModalProps> = ({ onImport, onC
             const parsedStudents = await parseStudentsFromExcel(file);
             setStudents(parsedStudents);
         } catch (err) {
-            setError('Failed to parse the Excel file. Please ensure it has columns like "nome", "familia", "gender", and privilege columns (e.g., "reading", "talk").');
+            setError('Failed to parse the Excel file. Please ensure it has a name column (e.g., "fullname", "name", or "nome") and other expected columns like "gender".');
             console.error(err);
         } finally {
             setIsLoading(false);
@@ -78,9 +78,9 @@ const ImportStudentsModal: React.FC<ImportStudentsModalProps> = ({ onImport, onC
                                     </tr>
                                 </thead>
                                 <tbody className="bg-white divide-y divide-gray-200">
-                                    {students.map(s => (
-                                        <tr key={s.id}>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{s.nome} {s.familia}</td>
+                                    {students.map((s, index) => (
+                                        <tr key={index}>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{s.nome}</td>
                                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize">{s.gender === 'male' ? 'Brother' : 'Sister'}</td>
                                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 truncate max-w-xs">{getPrivilegesSummary(s.privileges) || 'None'}</td>
                                         </tr>

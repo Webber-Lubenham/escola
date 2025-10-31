@@ -12,7 +12,6 @@ interface EditStudentModalProps {
 
 const emptyStudent: Omit<Student, 'id'> = {
     nome: '',
-    familia: '',
     gender: 'male',
     email: '',
     telefone: '',
@@ -144,13 +143,9 @@ const EditStudentModal: React.FC<EditStudentModalProps> = ({ student, allAssignm
                         <fieldset className="space-y-4">
                             <legend className="text-md font-medium text-gray-800">Basic Info</legend>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div>
-                                    <label htmlFor="nome" className="block text-sm font-medium text-gray-700">First Name</label>
-                                    <input type="text" name="nome" id="nome" value={formData.nome} onChange={handleChange} required className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500" />
-                                </div>
-                                <div>
-                                    <label htmlFor="familia" className="block text-sm font-medium text-gray-700">Last Name</label>
-                                    <input type="text" name="familia" id="familia" value={formData.familia} onChange={handleChange} required className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500" />
+                                <div className="sm:col-span-2">
+                                    <label htmlFor="nome" className="block text-sm font-medium text-gray-700">Student Name</label>
+                                    <input type="text" name="nome" id="nome" value={formData.nome} onChange={handleChange} required className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Full Name" />
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700">Gender</label>

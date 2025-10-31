@@ -36,19 +36,26 @@ const AssignStudentModal: React.FC<AssignStudentModalProps> = ({ part, students,
         </div>
         <div className="p-6 max-h-80 overflow-y-auto">
           <ul className="space-y-2">
-            {qualifiedStudents.length > 0 ? qualifiedStudents.map(student => (
+            {qualifiedStudents.length > 0 ? qualifiedStudents.map(student => {
+              const nameParts = student.nome.trim().split(/\s+/);
+              let initials = '';
+              if (nameParts.length > 0 && nameParts[0]) { initials += nameParts[0][0]; }
+              if (nameParts.length > 1 && nameParts[nameParts.length - 1]) { initials += nameParts[nameParts.length - 1][0]; }
+              else if (nameParts.length === 1 && nameParts[0].length > 1) { initials += nameParts[0][1]; }
+              
+              return (
               <li key={student.id}>
                 <button
                   onClick={() => onAssign(student.id)}
                   className="w-full text-left p-3 rounded-md hover:bg-blue-50 transition-colors flex items-center space-x-3"
                 >
                     <div className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold">
-                        {student.nome.charAt(0)}{student.familia.charAt(0)}
+                        {initials.toUpperCase()}
                     </div>
-                    <span>{student.nome} {student.familia}</span>
+                    <span>{student.nome}</span>
                 </button>
               </li>
-            )) : <p className="text-gray-500">No qualified students found for this part.</p>}
+            )}) : <p className="text-gray-500">No qualified students found for this part.</p>}
           </ul>
         </div>
         <div className="p-4 bg-gray-50 text-right rounded-b-lg">
