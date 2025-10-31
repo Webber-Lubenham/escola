@@ -44,6 +44,7 @@ export const parseStudentsFromExcel = (file: File): Promise<Student[]> => {
                         id: crypto.randomUUID(),
                         nome: firstName,
                         familia: lastName,
+                        gender: (normalizedRow.genero || normalizedRow.gender || 'male').toLowerCase() === 'female' ? 'female' : 'male',
                         email: normalizedRow.email || '',
                         telefone: normalizedRow.telefone || normalizedRow.phone || '',
                         dataNascimento: normalizedRow.datanascimento || normalizedRow.birthdate || '',
@@ -55,7 +56,6 @@ export const parseStudentsFromExcel = (file: File): Promise<Student[]> => {
                         observacoes: normalizedRow.observacoes || normalizedRow.notes || '',
                         ministryExperience: normalizedRow.ministryexperience || normalizedRow.experienciaministerial || '',
                         privileges: {
-                            isMale: (normalizedRow.genero || normalizedRow.gender || 'masculino').toLowerCase() !== 'feminino',
                             chairman: toBoolean(normalizedRow.chairman),
                             pray: toBoolean(normalizedRow.pray),
                             treasures: toBoolean(normalizedRow.treasures || normalizedRow.tresures),

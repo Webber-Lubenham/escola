@@ -113,7 +113,7 @@ const StudentList: React.FC<StudentListProps> = ({ students, assignments, onAddS
                     <div>
                         <p className="font-semibold text-gray-800">{student.nome} {student.familia}</p>
                         <p className="text-sm text-gray-500 capitalize">
-                           {student.cargo ? student.cargo.replace(/_/g, ' ') : (student.privileges.isMale ? 'Brother' : 'Sister')}
+                           {student.cargo ? student.cargo.replace(/_/g, ' ') : (student.gender === 'male' ? 'Brother' : 'Sister')}
                         </p>
                     </div>
                 </div>

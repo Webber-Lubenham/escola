@@ -13,6 +13,7 @@ export interface Student {
   id: string;
   nome: string;
   familia: string;
+  gender: 'male' | 'female';
   email?: string;
   telefone?: string;
   dataNascimento?: string;
@@ -24,7 +25,6 @@ export interface Student {
   observacoes?: string;
   ministryExperience?: string; // New field for ministry experience
   privileges: {
-    isMale: boolean;
     treasures: boolean;
     gems: boolean;
     reading: boolean;
@@ -71,7 +71,7 @@ export interface Assignment {
   status: 'assigned' | 'completed' | 'absent';
 }
 
-export type RequiredPrivileges = (keyof Omit<Student['privileges'], 'isMale'>)[];
+export type RequiredPrivileges = (keyof Student['privileges'])[];
 
 export type CustomRequirements = Record<string, RequiredPrivileges>; // Key is `${weekId}-${partId}`
 

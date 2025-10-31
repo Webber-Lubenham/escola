@@ -21,8 +21,7 @@ export const PART_TYPE_INSTRUCTIONS: { [key: string]: string } = {
     "student_talk": `This is a talk for a male student given to the congregation. It should focus on how to apply a specific point or verse from the 'Love People' brochure in the ministry.`,
 };
 
-// FIX: Narrowed the type of `key` to `keyof Omit<Student['privileges'], 'isMale'>` to match the `RequiredPrivileges` type and prevent type errors in components that use this list.
-export const PRIVILEGE_LIST: { key: keyof Omit<Student['privileges'], 'isMale'>; label: string }[] = [
+export const PRIVILEGE_LIST: { key: keyof Student['privileges']; label: string }[] = [
     { key: 'chairman', label: 'Chairman' },
     { key: 'pray', label: 'Prayer' },
     { key: 'treasures', label: 'Treasures Talk' },

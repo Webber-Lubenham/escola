@@ -9,10 +9,12 @@ const findQualificationBottleneck = (
     // Gender check
     if (part.restricoes?.genero) {
         if (part.restricoes.genero === 'M') {
-            const hasGenderMatch = students.some(s => s.privileges.isMale);
+            // FIX: Property 'isMale' does not exist on type 'privileges'. Check student.gender instead.
+            const hasGenderMatch = students.some(s => s.gender === 'male');
             if (!hasGenderMatch) return 'No male students exist in the student list.';
         } else { // 'F'
-            const hasGenderMatch = students.some(s => !s.privileges.isMale);
+            // FIX: Property 'isMale' does not exist on type 'privileges'. Check student.gender instead.
+            const hasGenderMatch = students.some(s => s.gender === 'female');
             if (!hasGenderMatch) return 'No female students exist in the student list.';
         }
     }
@@ -29,7 +31,7 @@ const findQualificationBottleneck = (
     const requiredDefaultPrivilege = defaultPrivilegeMap[part.tipo];
     
     if (requiredDefaultPrivilege) {
-        const hasPrivilegeMatch = students.some(s => s.privileges[requiredDefaultPrivilege as keyof Omit<Student['privileges'], 'isMale'>]);
+        const hasPrivilegeMatch = students.some(s => s.privileges[requiredDefaultPrivilege]);
         if (!hasPrivilegeMatch) {
             return `No students have the required default privilege: '${requiredDefaultPrivilege}'.`;
         }

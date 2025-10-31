@@ -13,6 +13,7 @@ interface EditStudentModalProps {
 const emptyStudent: Omit<Student, 'id'> = {
     nome: '',
     familia: '',
+    gender: 'male',
     email: '',
     telefone: '',
     dataNascimento: '',
@@ -24,7 +25,6 @@ const emptyStudent: Omit<Student, 'id'> = {
     observacoes: '',
     ministryExperience: '',
     privileges: {
-        isMale: true,
         treasures: false,
         gems: false,
         reading: false,
@@ -86,14 +86,10 @@ const EditStudentModal: React.FC<EditStudentModalProps> = ({ student, allAssignm
           } else {
             handlePrivilegeChange(e as React.ChangeEvent<HTMLInputElement>);
           }
-        } else if (name === 'genero') {
-            const isMale = value === 'masculino';
+        } else if (name === 'gender') {
             setFormData(prev => ({
                 ...prev,
-                privileges: {
-                    ...prev.privileges,
-                    isMale: isMale,
-                },
+                gender: value as 'male' | 'female',
             }));
         } else {
           setFormData(prev => ({...prev, [name]: value}));
@@ -143,29 +139,29 @@ const EditStudentModal: React.FC<EditStudentModalProps> = ({ student, allAssignm
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700">Gender</label>
-                                    <div className="mt-2 flex space-x-6 pt-1">
-                                        <label className="flex items-center cursor-pointer">
-                                            <input
-                                                type="radio"
-                                                name="genero"
-                                                value="masculino"
-                                                checked={formData.privileges.isMale === true}
-                                                onChange={handleChange}
-                                                className="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500"
-                                            />
-                                            <span className="ml-2 text-sm text-gray-700">Brother</span>
-                                        </label>
-                                        <label className="flex items-center cursor-pointer">
-                                            <input
-                                                type="radio"
-                                                name="genero"
-                                                value="feminino"
-                                                checked={formData.privileges.isMale === false}
-                                                onChange={handleChange}
-                                                className="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500"
-                                            />
-                                            <span className="ml-2 text-sm text-gray-700">Sister</span>
-                                        </label>
+                                    <div className="mt-2 flex rounded-md shadow-sm">
+                                      <label className={`relative transition-colors duration-150 inline-flex items-center justify-center w-1/2 p-2 text-sm font-medium border border-gray-300 rounded-l-md cursor-pointer focus-within:z-10 focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500 ${formData.gender === 'male' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-50'}`}>
+                                          <input
+                                              type="radio"
+                                              name="gender"
+                                              value="male"
+                                              checked={formData.gender === 'male'}
+                                              onChange={handleChange}
+                                              className="sr-only"
+                                          />
+                                          Brother
+                                      </label>
+                                      <label className={`relative transition-colors duration-150 -ml-px inline-flex items-center justify-center w-1/2 p-2 text-sm font-medium border border-gray-300 rounded-r-md cursor-pointer focus-within:z-10 focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500 ${formData.gender === 'female' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-50'}`}>
+                                          <input
+                                              type="radio"
+                                              name="gender"
+                                              value="female"
+                                              checked={formData.gender === 'female'}
+                                              onChange={handleChange}
+                                              className="sr-only"
+                                          />
+                                          Sister
+                                      </label>
                                     </div>
                                 </div>
                                 <div>
@@ -244,7 +240,7 @@ const EditStudentModal: React.FC<EditStudentModalProps> = ({ student, allAssignm
                                         <input
                                             type="checkbox"
                                             name={priv.key}
-                                            checked={formData.privileges[priv.key as keyof Omit<Student['privileges'], 'isMale'>] || false}
+                                            checked={formData.privileges[priv.key as keyof Student['privileges']] || false}
                                             onChange={handlePrivilegeChange}
                                             className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                                         />

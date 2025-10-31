@@ -13,13 +13,13 @@ export const getQualifiedStudents = (
 ): Student[] => {
     const qualified = students.filter(student => {
         // Gender check
-        if ((part.restricoes?.genero === 'M' && !student.privileges.isMale) ||
-            (part.restricoes?.genero === 'F' && student.privileges.isMale)) {
+        if ((part.restricoes?.genero === 'M' && student.gender !== 'male') ||
+            (part.restricoes?.genero === 'F' && student.gender !== 'female')) {
             return false;
         }
 
         // Default privilege check based on part type
-        const defaultPrivilegeMap: Partial<Record<string, keyof Omit<Student['privileges'], 'isMale'>>> = {
+        const defaultPrivilegeMap: Partial<Record<string, keyof Student['privileges']>> = {
             'reading': 'reading',
             'student_talk': 'talk', // student_talk part type requires the 'talk' privilege
             'explaining_beliefs': 'explainingBeliefs',

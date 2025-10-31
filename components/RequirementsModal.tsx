@@ -14,10 +14,9 @@ const RequirementsModal: React.FC<RequirementsModalProps> = ({ part, currentRequ
 
     const handlePrivilegeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, checked } = e.target;
-        // FIX: Cast `name` to the more specific type `keyof Omit<Student['privileges'], 'isMale'>`
-        // to align with the `RequiredPrivileges` type. This is safe because `isMale` is not
-        // rendered as a selectable privilege in the UI.
-        const key = name as keyof Omit<Student['privileges'], 'isMale'>;
+        // FIX: Cast `name` to the more specific type `keyof Student['privileges']`
+        // to align with the `RequiredPrivileges` type.
+        const key = name as keyof Student['privileges'];
 
         setSelectedPrivileges(prev =>
             checked ? [...prev, key] : prev.filter(p => p !== key)

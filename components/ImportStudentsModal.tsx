@@ -26,7 +26,7 @@ const ImportStudentsModal: React.FC<ImportStudentsModalProps> = ({ onImport, onC
             const parsedStudents = await parseStudentsFromExcel(file);
             setStudents(parsedStudents);
         } catch (err) {
-            setError('Failed to parse the Excel file. Please ensure it has columns like "nome", "familia", "genero", and privilege columns (e.g., "reading", "talk").');
+            setError('Failed to parse the Excel file. Please ensure it has columns like "nome", "familia", "gender", and privilege columns (e.g., "reading", "talk").');
             console.error(err);
         } finally {
             setIsLoading(false);
@@ -81,8 +81,7 @@ const ImportStudentsModal: React.FC<ImportStudentsModalProps> = ({ onImport, onC
                                     {students.map(s => (
                                         <tr key={s.id}>
                                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{s.nome} {s.familia}</td>
-                                            {/* FIX: Use `s.privileges.isMale` to determine gender as 'genero' does not exist on the Student type. */}
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize">{s.privileges.isMale ? 'Brother' : 'Sister'}</td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize">{s.gender === 'male' ? 'Brother' : 'Sister'}</td>
                                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 truncate max-w-xs">{getPrivilegesSummary(s.privileges) || 'None'}</td>
                                         </tr>
                                     ))}

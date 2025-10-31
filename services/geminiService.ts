@@ -122,8 +122,11 @@ export async function getPreparationTips(part: MeetingPart, instructions: string
 
     try {
         const response = await ai.models.generateContent({
-            model: 'gemini-2.5-flash',
+            model: 'gemini-2.5-pro',
             contents: prompt,
+            config: {
+                thinkingConfig: { thinkingBudget: 32768 },
+            }
         });
 
         const text = response.text;
